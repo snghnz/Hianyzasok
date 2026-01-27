@@ -1,40 +1,34 @@
-"use client";
 
-import { clsx } from "clsx";
-import { SunMoon } from "lucide-react";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { useGlobalStore } from "@/store/globalStore";
+import Megoldas  from "@/app/Megoldas";
 
-export default function HomePage() {
-  // Using Zustand global store for state management example
-  const { loggedUser, setLoggedUser } = useGlobalStore();
-  const { lightTheme, setLightTheme } = useGlobalStore();
+type Searchparams = {
+  hónap?: string;
+  nap?: string;
+  napNeve?: string;
+  óra?: string;
+}
 
-  useEffect(() => {
-    toast.success("Render page!");
-  }); // no dependency array to demonstrate re-render toast
+export default async function HonePage({searchParams}:{searchParams: Searchparams}){
+  const p = await searchParams;
+  const hónap: number = p.hónap ? Number(p.hónap) : 2;
+  const nap: number = p.nap ? Number(p.nap) : 3;
 
-  function handleThemeToggle() {
-    setLightTheme(!lightTheme);
-    document.documentElement.classList.toggle("dark", lightTheme);
-  }
-
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 py-2 dark:bg-gray-800">
-      <h1 className={clsx("mb-6 text-3xl font-bold", lightTheme ? "text-black" : "text-white")}>
-        Hello, {loggedUser || ""}! 😎
-      </h1>
-      <input
-        className="input input-primary"
-        type="text"
-        value={loggedUser || ""}
-        onChange={(e) => setLoggedUser(e.target.value)}
-      />
-      <button className="btn mt-4 btn-primary" onClick={handleThemeToggle}>
-        <SunMoon className="mr-2" size={24} />
-        Toggle Theme
-      </button>
-    </div>
-  );
+  const m: Megoldas = new Megoldas("naplo.txt");
+  return(<div>
+    
+    <div>
+      2. feladat
+      <br />A naplóban {m.bejegyzésekSzáma} nejegyzés van.
+      </div>
+    <div>
+      3. feladat <br />Az igazolt hiányzások száma: {m.összesIgazoltDb}, az igazolatlanoké: {m.összesIgazolatlanDb}
+      </div>
+    <form>
+      5. feladat
+      <p>A hónap sorszáma=<input className="input input-sm" name="hónap" type="text" /></p>
+      <p>A nap sorszáma=<input className="inpur input-sm" name="nap" type="text" /></p>
+      <button className="hidden" type="submit"></button>
+    </form>
+  </div>
+  )
 }
