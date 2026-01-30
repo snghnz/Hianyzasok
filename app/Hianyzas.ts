@@ -3,6 +3,16 @@ export default class Hiányzás {
     #hiányzásKód: string;
     #hónap: number;
     #nap: number;
+    get hülye(): number {
+        return this.#hónap
+    }
+    get hü(): number {
+        return this.#nap
+    }
+
+    get hianyzasdb(): number{
+        return this.igazoltDb + this.igazolatlanDb;
+    }
 
     get igazoltDb(): number{
         return this.#megszámol("X")
@@ -27,5 +37,10 @@ export default class Hiányzás {
             if (e == ch){db++}
         }
         return db;
+    }
+
+    voltHianyzas(ora_sorszama: number): boolean{
+        const ora_indexe = ora_sorszama - 1;
+        return this.#hiányzásKód[ora_indexe] == "I" || this.#hiányzásKód[ora_indexe] == "X"
     }
 }
