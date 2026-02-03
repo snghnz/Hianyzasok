@@ -21,6 +21,9 @@ export default class Hiányzás {
     get igazolatlanDb(): number{
         return this.#megszámol("I")
     }
+    get név():string{
+        return this.#név
+    }
 
     constructor(adatsor: string, dátum: string){
         let m: string[] = adatsor.split(" ");

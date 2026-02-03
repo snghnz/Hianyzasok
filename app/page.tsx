@@ -29,12 +29,31 @@ export default async function HonePage({searchParams}:{searchParams: Searchparam
       5. feladat
       <p>A hónap sorszáma=<input 
       className="input input-sm" 
+      defaultValue={hónap}
       name="hónap" 
-      type="text" /></p>
+      required
+      type="text" 
+      /></p>
       <p>A nap sorszáma=<input 
-      className="inpur input-sm" 
+      className="input input-sm" 
+      defaultValue={nap}
       name="nap" 
+      required
       type="text" /></p>
+      <p>A nap neve=<input 
+      className="input input-sm" 
+      defaultValue={napNeve}
+      name="napNeve" 
+      required
+      type="text" /></p>
+       <p>Óra=<input 
+      className="input input-sm" 
+      defaultValue={óra}
+      name="óra" 
+      required
+      type="text" /></p>
+      <p>7. feladat</p>
+      <p>A legtöbbet hiányzott tanuló(k): {m.legtobbetHianyzok}</p>
       <button 
       className="hidden" 
       type="submit"></button>

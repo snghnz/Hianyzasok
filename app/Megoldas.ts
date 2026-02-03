@@ -27,6 +27,27 @@ export default class Megoldas{
 
     get #hianyzasokStat(): Map<string, number>{
         const stat: Map<string, number> = new Map<string, number>();
+        for (const e of this.#hianyzasok){
+            if (stat.has(e.név)){
+                stat.set(e.név, stat.get(e.név) as number + e.hianyzasdb)
+            } else{
+                stat.set(e.név, e.hianyzasdb)
+            }
+            stat.set(e.név, stat.get(e.név)? 1:1)
+        }
+        return stat;
+    }
+    get legtobbetHianyzok(): string{
+        const stat: Map<string, number> = this.#hianyzasokStat
+        const maxÓra: number = Math.max(...stat.values())
+        const tanulok: string[] = []
+        for (const key of stat.keys()) {
+            const ertek = stat.get(key);
+            if (ertek == maxÓra){
+                tanulok.push(key)
+            }
+        }
+        return tanulok.join(" ")
     }
 
     constructor(forrás: string){
